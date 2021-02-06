@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   
   get 'signup', to: 'users#new'
   resources :users, only: [:show, :create]
+  
+  resources :tasks, only: [:new, :edit, :create, :destroy]
+  
+#   resources :categories, only: [:new, :create] # カテゴリの削除必要？
+  
 end

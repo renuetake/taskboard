@@ -15,6 +15,8 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
+      # categoriesテーブルに空データの登録(美しくない。。)
+      init_category(@user)
       redirect_to root_path
     else
       flash[:danger] = 'ユーザの登録に失敗しました。'
@@ -26,5 +28,10 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+  def init_category(user)
+    category = user.categories.build(category: ' ')
+    category.save
   end
 end
