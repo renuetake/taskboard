@@ -10,8 +10,9 @@
       <%= render 'layouts/error_messages', model: f.object %>
     
       <div class="form-group">
-        <%= f.label :category, 'カテゴリ' %>
-        <!--<%= f.collection_select :category, Category.all, :category, :category, include_blank: 'カテゴリ', class: 'form-control' %>-->
+        <div class="d-flex justify-content-between">
+          <%= f.label :category, 'カテゴリ' %><%= link_to 'カテゴリを新規追加する', root_path, class: 'form-text'  %>
+        </div>
         <%= f.select :category, current_user.categories.all.map {|c| [c.category, c.id]}, {}, { class: 'form-control' } %>
       </div>
       
@@ -41,6 +42,8 @@
       </div>
       
       <%= f.submit '確定', class: 'btn btn-primary btn-block' %>
+      
     <% end %>
   </div>
+
 </div>

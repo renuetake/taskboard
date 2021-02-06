@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   resources :users, only: [:show, :create]
   
-  resources :tasks, only: [:new, :edit, :create, :destroy]
+  get 'tasks', to: 'tasks#index'
+  get 'exclude_finished', to: 'tasks#exclude_finished'
   
+  resources :tasks, only: [:new, :edit, :update, :create, :destroy]
+
 #   resources :categories, only: [:new, :create] # カテゴリの削除必要？
   
 end

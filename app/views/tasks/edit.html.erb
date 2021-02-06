@@ -1,2 +1,52 @@
-<h1>Tasks#edit</h1>
-<p>Find me in app/views/tasks/edit.html.erb</p>
+<div class="text-center">
+  <h1>タスク編集</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    
+    <%= form_with(model: @task, local: true) do |f| %>
+    
+      <%= render 'layouts/error_messages', model: f.object %>
+    
+      <div class="form-group">
+        <div class="d-flex justify-content-between">
+          <%= f.label :category, 'カテゴリ' %><%= link_to 'カテゴリを新規追加する', root_path, class: 'form-text'  %>
+        </div>
+        <%= f.select :category, current_user.categories.all.map {|c| [c.category, c.id]}, {}, { class: 'form-control' } %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :name, 'タスク名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :status, '状態' %>
+        <%= f.select :status, Status.all.map { |s| [s.status, s.id] }, {}, { class: 'form-control' } %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :priority, '優先度' %>
+        <%= f.select :priority, Priority.all.map { |p| [p.priority, p.id] }, {}, { class: 'form-control' } %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :start, '開始日' %>
+        <%= f.date_field :start, class: 'form-control'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :deadline, '終了日' %>
+        <%= f.date_field :deadline, class: 'form-control' %>
+      </div>
+      
+      <%= f.submit '確定', class: 'btn btn-primary btn-block' %>
+      
+      <div class="text-center mt-3">
+        <%= link_to '子タスクを設定する', root_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
