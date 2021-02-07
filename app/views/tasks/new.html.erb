@@ -11,7 +11,7 @@
     
       <div class="form-group">
         <div class="d-flex justify-content-between">
-          <%= f.label :category, 'カテゴリ' %><%= link_to 'カテゴリを新規追加する', root_path, class: 'form-text'  %>
+          <%= f.label :category, 'カテゴリ' %><%= link_to 'カテゴリを新規追加する', new_category_path, class: 'form-text'  %>
         </div>
         <%= f.select :category, current_user.categories.all.map {|c| [c.category, c.id]}, {}, { class: 'form-control' } %>
       </div>

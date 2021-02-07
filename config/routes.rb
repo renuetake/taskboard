@@ -10,10 +10,17 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create]
   
   get 'tasks', to: 'tasks#index'
-  get 'exclude_finished', to: 'tasks#exclude_finished'
+  get 'include_finished', to: 'tasks#include_finished'
   
-  resources :tasks, only: [:new, :edit, :update, :create, :destroy]
+  resources :tasks, only: [:new, :edit, :update, :create] do
+    member do
+      get :set_child
+    end
+  end
+  
+  resources :categories, only: [:new, :create]
+  
+  resources :relationships, only: [:create, :destroy]
 
-#   resources :categories, only: [:new, :create] # カテゴリの削除必要？
-  
+
 end

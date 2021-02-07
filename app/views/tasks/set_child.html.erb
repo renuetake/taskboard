@@ -1,0 +1,47 @@
+<h1><%= current_user.tasks.find(params[:id]).name %>の子タスク設定ページ</h1>
+
+<div class="row">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>カテゴリ</td>
+      <td>親タスク名</td>
+      <td>タスク名</td>
+      <td>状態</td>
+      <td>優先度</td>
+      <td>開始日</td>
+      <td>終了日</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @tasks.any? %>
+      <% @tasks.each do |task| %>
+        <tr class="<%= 'table-warning' if is_child_task?(task, params[:id]) %>">
+          <td><%= task.category.category %></td>
+          
+          <td>
+            <%= form_with(model: current_user.tasks.find(params[:id]).relationships.find_by(child_task_id: task.id), local: true, method: :delete) do |f| %>
+              <%= hidden_field_tag :child_task_id, task.id %>
+              <%= hidden_field_tag :parent_id, params[:id] %>
+              <%= f.submit parent_name_or_blank(task), class: 'btn btn-link' %>
+              
+            <% end %>
+          </td>
+          
+          <td>
+            <%= form_with(model: task.relationships.build, local: true) do |f| %>
+              <%= hidden_field_tag :child_task_id, task.id %>
+              <%= hidden_field_tag :id, params[:id] %>
+              <%= f.submit task.name, class: 'btn btn-link' %>
+            <% end %>
+          </td>
+          <td><%= task.status.status %></td>
+          <td><%= task.priority.priority %></td>
+          <td><%= task.start %></td>
+          <td><%= task.deadline %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>

@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :require_user_logged_in
   
   def index
-    @tasks = current_user.tasks.all
+    @tasks = current_user.tasks.where.not(status_id: 3) # status_id = 3 は '終了'
   end
   
   def new
@@ -54,15 +54,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def destroy
+  def set_child
+    @tasks = current_user.tasks.reject { |task| task.parents.include?(task) and task.id != params[:id] }
   end
+
   
-  
-  def exclude_finished
+  def include_finished
     @tasks = current_user.tasks.all
   end
   
-  private 
+  private   
+  
   def task_params
     params.require(:task).permit(:category, :name, :status, :priority, :start, :deadline)
   end

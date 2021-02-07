@@ -1,13 +1,9 @@
-<div class="text-center">
-  <h1>タスク一覧</h1>
-</div>
-
 <div class="row">
   
   <div class="mt-2 col-sm-7 offset-sm-5">
     <ul class="nav nav-tabs nav-justified">
-      <li class="nav-item"><a href="<%= exclude_finished_path %>" class="nav-link <%= 'active' if current_page?(exclude_finished_path) %>">終了タスク非表示</a></li>
-      <li class="nav-item"><a href="<%= tasks_path %>" class="nav-link <%= 'active' if current_page?(tasks_path) %>">終了タスク表示</a></li>
+      <li class="nav-item"><a href="<%= tasks_path %>" class="nav-link <%= 'active' if current_page?(tasks_path) %>">終了タスク非表示</a></li>
+      <li class="nav-item"><a href="<%= include_finished_path %>" class="nav-link <%= 'active' if current_page?(include_finished_path) %>">終了タスク表示</a></li>
     </ul>
   </div>
 </div>
@@ -27,11 +23,11 @@
         </tr>
       </thead>
       <tbody>
-        <% if @tasks.any? %>
-          <% @tasks.each do |task| %>
-            <% next if task.status.status.eql?('終了') %>
+        <% if tasks.any? %>
+          <% tasks.each do |task| %>
+            <tr class="<%= 'table-secondary' if task.status.status.eql?('終了') %>">
               <td><%= task.category.category %></td>
-              <td> 親タスク名ロジック要検討</td>
+              <td><%= parent_name_or_blank(task) %></td>
               <td><a href="<%= edit_task_path(task) %>"><%= task.name %></a></td>
               <td><%= task.status.status %></td>
               <td><%= task.priority.priority %></td>

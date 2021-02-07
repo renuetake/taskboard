@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    counts(@user)
   end
 
   def new
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
       # categoriesテーブルに空データの登録(美しくない。。)
-      init_category(@user)
+      # init_category(@user)
       redirect_to root_path
     else
       flash[:danger] = 'ユーザの登録に失敗しました。'

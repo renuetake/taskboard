@@ -1,8 +1,21 @@
-<h1>ユーザ詳細ページです</h1>
+<div class="text-center">
+  <h1>ユーザ詳細ページ</h1>
+</div>
 
-
-<p>名前：<%= @user.name %></p>
-<p>Email：<%= @user.email %></p>
-<p>登録日：<%= @user.created_at %></p>
-
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row">
+  <div class="col-sm-7 offset-sm-2">
+    <h2>基本情報</h2>
+    
+    <p>名前：<%= @user.name %></p>
+    <p>Email：<%= @user.email %></p>
+    <p>登録日：<%= @user.created_at %></p>
+  </div>
+  
+  <div class="col-sm-7 offset-sm-2">
+    <h2>タスク情報</h2>
+    
+    <p>登録タスク数： <%= @count_tasks %> 個</p>
+    <p>終了タスク数： <%= @count_finished_tasks %> 個</p>
+    <p>完了率　　　： <%= @count_finished_rate %> %</p>
+  </div>
+</div>

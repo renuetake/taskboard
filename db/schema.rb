@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_132338) do
+ActiveRecord::Schema.define(version: 2021_02_07_053711) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 2021_02_06_132338) do
     t.string "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "task_id"
+    t.bigint "child_task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_task_id"], name: "index_relationships_on_child_task_id"
+    t.index ["task_id", "child_task_id"], name: "index_relationships_on_task_id_and_child_task_id", unique: true
+    t.index ["task_id"], name: "index_relationships_on_task_id"
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -57,6 +69,9 @@ ActiveRecord::Schema.define(version: 2021_02_06_132338) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "relationships", "tasks"
+  add_foreign_key "relationships", "tasks", column: "child_task_id"
+  add_foreign_key "relationships", "users"
   add_foreign_key "tasks", "categories"
   add_foreign_key "tasks", "priorities"
   add_foreign_key "tasks", "statuses"
