@@ -57,4 +57,8 @@ class Task < ApplicationRecord
     relationship.destroy if relationship
   end
   
+  def has_parent?
+    self.parents.all.count != 0
+  end
+  
 end

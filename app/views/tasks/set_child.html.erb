@@ -11,6 +11,7 @@
       <td>優先度</td>
       <td>開始日</td>
       <td>終了日</td>
+
     </tr>
   </thead>
   <tbody>
@@ -23,7 +24,9 @@
             <%= form_with(model: current_user.tasks.find(params[:id]).relationships.find_by(child_task_id: task.id), local: true, method: :delete) do |f| %>
               <%= hidden_field_tag :child_task_id, task.id %>
               <%= hidden_field_tag :parent_id, params[:id] %>
-              <%= f.submit parent_name_or_blank(task), class: 'btn btn-link' %>
+              <%= f.submit parent_name_or_blank(task), class: 'btn btn-link',
+              data: { confirm: "子タスクを削除しますか？"}
+              %>
               
             <% end %>
           </td>
@@ -32,7 +35,8 @@
             <%= form_with(model: task.relationships.build, local: true) do |f| %>
               <%= hidden_field_tag :child_task_id, task.id %>
               <%= hidden_field_tag :id, params[:id] %>
-              <%= f.submit task.name, class: 'btn btn-link' %>
+              <%= f.submit task.name, class: 'btn btn-link', 
+              data: {confirm: "子タスクに設定しますか？"} %>
             <% end %>
           </td>
           <td><%= task.status.status %></td>

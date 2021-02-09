@@ -22,5 +22,10 @@ Rails.application.routes.draw do
   
   resources :relationships, only: [:create, :destroy]
 
+  get 'ganttchart', to: 'gantt#index'
+  scope '/gantt' do
+    get '/data', to: 'gantt#data'
+  end
+  
 
 end
