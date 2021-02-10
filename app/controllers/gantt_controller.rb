@@ -6,12 +6,7 @@ class GanttController < ApplicationController
   def data
     tasks = current_user.tasks.all
     
-    links = {
-      :id => nil,
-      :source => nil,
-      :target => nil,
-      :type => nil
-    }
+
 
     # logger.debug(Date.parse(tasks[0].start))
 
@@ -31,12 +26,6 @@ class GanttController < ApplicationController
         :priority => task.priority.priority,
         :status => task.status.status,
         :parentName => get_parentName_or_nil(task)
-      }},
-      :links => links.map{|link| {
-        :id => nil,
-        :source => nil,
-        :target => nil,
-        :type => nil
       }}
     }
   end

@@ -1,7 +1,8 @@
 class Category < ApplicationRecord
   belongs_to :user
-  has_many :task
+  has_many :tasks, dependent: :destroy
+  
   
   validates :category, presence: true, length: { maximum: 255 },
-                       uniqueness: { case_sensitive: false }
+                       uniqueness: { scope: :user_id, case_sensitive: false }
 end

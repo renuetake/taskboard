@@ -18,14 +18,15 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :categories, only: [:new, :create]
-  
+  resources :categories, only: [:new, :create, :destroy]
+  get 'categories', to: 'categories#new'
   resources :relationships, only: [:create, :destroy]
 
   get 'ganttchart', to: 'gantt#index'
   scope '/gantt' do
     get '/data', to: 'gantt#data'
   end
+  
   
 
 end

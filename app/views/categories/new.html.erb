@@ -18,5 +18,29 @@
       
     <% end %>
   </div>
+</div>
 
+<div class="mt-5 row">
+  <div class="col-sm-6 offset-sm-3">
+    現在登録されているカテゴリ
+    
+    
+    <ul class="list-group">
+      <% Category.where(user_id: current_user.id).each do |category| %>
+        <% unless category.category == nil %>
+          <%= form_with(model: category, local: true, method: :delete) do |f| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+              <%= category.category %>
+              <%= hidden_field_tag :id, category.id %>
+              <%= button_tag type: "submit", class: 'btn', data: {confirm: 'このカテゴリを削除しますか？'} do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+              </span>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+    
+  </div>
 </div>

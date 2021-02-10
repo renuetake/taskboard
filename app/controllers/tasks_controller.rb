@@ -44,7 +44,7 @@ class TasksController < ApplicationController
       start: task_params[:start],
       deadline: task_params[:deadline]
       )
-      # 連続で追加する場合もありそうなので、取り合えずtask#newに飛ばす
+      # 連続で更新する場合もありそうなので、取り合えずtask#newに飛ばす
       flash[:success] = 'タスクを更新しました。'
       redirect_to tasks_path
     else

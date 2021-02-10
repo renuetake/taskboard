@@ -5,10 +5,10 @@ class Task < ApplicationRecord
   belongs_to :priority
   
   # 親子関係テーブルの関係定義
-  has_many :relationships
-  has_many :children, through: :relationships, source: :child_task
-  has_many :reverses_of_relationships, class_name: 'Relationship', foreign_key: 'child_task_id'
-  has_many :parents, through: :reverses_of_relationships, source: :task # 複数形だが、親は一つだけ
+  has_many :relationships, dependent: :destroy
+  has_many :children, through: :relationships, source: :child_task, dependent: :destroy
+  has_many :reverses_of_relationships, class_name: 'Relationship', foreign_key: 'child_task_id', dependent: :destroy
+  has_many :parents, through: :reverses_of_relationships, source: :task, dependent: :destroy # 複数形だが、親は一つだけ
   
   
   
