@@ -3,8 +3,15 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   
   def show
-    @user = User.find(params[:id])
-    counts(@user)
+    # 表示しようとしているページはログインユーザのものか判定
+    if current_user.id == params[:id].to_i
+      @user = current_user
+      counts(@user)
+    else
+      # ログインユーザ以外のユーザ詳細ページにアクセスしようとした場合は
+      # ログインユーザのユーザ詳細ページにリダイレクト
+      redirect_to user_path(current_user.id)  
+    end
   end
 
   def new
