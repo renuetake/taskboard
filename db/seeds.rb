@@ -19,12 +19,12 @@ Priority.create(priority: 'Low')
 
 
 # テストデータたち
-User.create(name: 'test1', email: 'test1@gmail.com', password: '1234')
-User.create(name: 'test2', email: 'test2@gmail.com', password: '1234')
+# User.create(name: 'test1', email: 'test1@gmail.com', password: '1234')
+# User.create(name: 'test2', email: 'test2@gmail.com', password: '1234')
 
-Category.create(user_id: 1, category: 'てすとゆーざー１の最初のカテゴリ')
-Category.create(user_id: 2, category: 'てすとゆーざー２の最初のカテゴリ')
+# Category.create(user_id: 1, category: 'てすとゆーざー１の最初のカテゴリ')
+# Category.create(user_id: 2, category: 'てすとゆーざー２の最初のカテゴリ')
 
-Task.create(user_id: 1, category_id: 1, name: 'ほげほげ', status_id: 1, priority_id: 1, start: "2021-01-01", deadline: "2021-02-10")
-Task.create(user_id: 1, category_id: 1, name: 'ふがふが', status_id: 2, priority_id: 2, start: "2021-01-01", deadline: "2021-02-10")
-Task.create(user_id: 1, category_id: 1, name: 'ほげふが', status_id: 3, priority_id: 3, start: "2021-01-01", deadline: "2021-02-10")
+# Task.create(user_id: 1, category_id: 1, name: 'ほげほげ', status_id: 1, priority_id: 1, start: "2021-01-01", deadline: "2021-02-10")
+# Task.create(user_id: 1, category_id: 1, name: 'ふがふが', status_id: 2, priority_id: 2, start: "2021-01-01", deadline: "2021-02-10")
+# Task.create(user_id: 1, category_id: 1, name: 'ほげふが', status_id: 3, priority_id: 3, start: "2021-01-01", deadline: "2021-02-10")
